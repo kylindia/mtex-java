@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.zhujian.mtex.mapper.AdminMapper" >
+  <resultMap id="BaseResultMap" type="org.zhujian.mtex.entity.Admin" >
+    <id column="admin_id" property="adminId" jdbcType="INTEGER" />
+    <result column="admin_number" property="adminNumber" jdbcType="VARCHAR" />
+    <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
+    <result column="admin_password" property="adminPassword" jdbcType="VARCHAR" />
+    <result column="admin_sex" property="adminSex" jdbcType="INTEGER" />
+    <result column="admin_phone" property="adminPhone" jdbcType="VARCHAR" />
+    <result column="admin_address" property="adminAddress" jdbcType="VARCHAR" />
+    <result column="admin_Img" property="adminImg" jdbcType="VARCHAR" />
+    <result column="admin_department_id" property="adminDepartmentId" jdbcType="INTEGER" />
+    <result column="admin_description" property="adminDescription" jdbcType="VARCHAR" />
+    <result column="admin_state" property="adminState" jdbcType="INTEGER" />
+    <result column="admin_email" property="adminEmail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    admin_id, admin_number, admin_name, admin_password, admin_sex, admin_phone, admin_address, 
+    admin_Img, admin_department_id, admin_description, admin_state, admin_email
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.zhujian.mtex.entity.AdminExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.zhujian.mtex.entity.AdminExample" >
+    delete from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.zhujian.mtex.entity.Admin" >
+    insert into admin (admin_id, admin_number, admin_name, 
+      admin_password, admin_sex, admin_phone, 
+      admin_address, admin_Img, admin_department_id, 
+      admin_description, admin_state, admin_email
+      )
+    values (#{adminId,jdbcType=INTEGER}, #{adminNumber,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, 
+      #{adminPassword,jdbcType=VARCHAR}, #{adminSex,jdbcType=INTEGER}, #{adminPhone,jdbcType=VARCHAR}, 
+      #{adminAddress,jdbcType=VARCHAR}, #{adminImg,jdbcType=VARCHAR}, #{adminDepartmentId,jdbcType=INTEGER}, 
+      #{adminDescription,jdbcType=VARCHAR}, #{adminState,jdbcType=INTEGER}, #{adminEmail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.zhujian.mtex.entity.Admin" >
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="adminNumber != null" >
+        admin_number,
+      </if>
+      <if test="adminName != null" >
+        admin_name,
+      </if>
+      <if test="adminPassword != null" >
+        admin_password,
+      </if>
+      <if test="adminSex != null" >
+        admin_sex,
+      </if>
+      <if test="adminPhone != null" >
+        admin_phone,
+      </if>
+      <if test="adminAddress != null" >
+        admin_address,
+      </if>
+      <if test="adminImg != null" >
+        admin_Img,
+      </if>
+      <if test="adminDepartmentId != null" >
+        admin_department_id,
+      </if>
+      <if test="adminDescription != null" >
+        admin_description,
+      </if>
+      <if test="adminState != null" >
+        admin_state,
+      </if>
+      <if test="adminEmail != null" >
+        admin_email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="adminNumber != null" >
+        #{adminNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null" >
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null" >
+        #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSex != null" >
+        #{adminSex,jdbcType=INTEGER},
+      </if>
+      <if test="adminPhone != null" >
+        #{adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adminAddress != null" >
+        #{adminAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="adminImg != null" >
+        #{adminImg,jdbcType=VARCHAR},
+      </if>
+      <if test="adminDepartmentId != null" >
+        #{adminDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adminDescription != null" >
+        #{adminDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="adminState != null" >
+        #{adminState,jdbcType=INTEGER},
+      </if>
+      <if test="adminEmail != null" >
+        #{adminEmail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.zhujian.mtex.entity.AdminExample" resultType="java.lang.Integer" >
+    select count(*) from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update admin
+    <set >
+      <if test="record.adminId != null" >
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminNumber != null" >
+        admin_number = #{record.adminNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminName != null" >
+        admin_name = #{record.adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminPassword != null" >
+        admin_password = #{record.adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminSex != null" >
+        admin_sex = #{record.adminSex,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminPhone != null" >
+        admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminAddress != null" >
+        admin_address = #{record.adminAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminImg != null" >
+        admin_Img = #{record.adminImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminDepartmentId != null" >
+        admin_department_id = #{record.adminDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminDescription != null" >
+        admin_description = #{record.adminDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminState != null" >
+        admin_state = #{record.adminState,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminEmail != null" >
+        admin_email = #{record.adminEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update admin
+    set admin_id = #{record.adminId,jdbcType=INTEGER},
+      admin_number = #{record.adminNumber,jdbcType=VARCHAR},
+      admin_name = #{record.adminName,jdbcType=VARCHAR},
+      admin_password = #{record.adminPassword,jdbcType=VARCHAR},
+      admin_sex = #{record.adminSex,jdbcType=INTEGER},
+      admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
+      admin_address = #{record.adminAddress,jdbcType=VARCHAR},
+      admin_Img = #{record.adminImg,jdbcType=VARCHAR},
+      admin_department_id = #{record.adminDepartmentId,jdbcType=INTEGER},
+      admin_description = #{record.adminDescription,jdbcType=VARCHAR},
+      admin_state = #{record.adminState,jdbcType=INTEGER},
+      admin_email = #{record.adminEmail,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.zhujian.mtex.entity.Admin" >
+    update admin
+    <set >
+      <if test="adminNumber != null" >
+        admin_number = #{adminNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null" >
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null" >
+        admin_password = #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSex != null" >
+        admin_sex = #{adminSex,jdbcType=INTEGER},
+      </if>
+      <if test="adminPhone != null" >
+        admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adminAddress != null" >
+        admin_address = #{adminAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="adminImg != null" >
+        admin_Img = #{adminImg,jdbcType=VARCHAR},
+      </if>
+      <if test="adminDepartmentId != null" >
+        admin_department_id = #{adminDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adminDescription != null" >
+        admin_description = #{adminDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="adminState != null" >
+        admin_state = #{adminState,jdbcType=INTEGER},
+      </if>
+      <if test="adminEmail != null" >
+        admin_email = #{adminEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.zhujian.mtex.entity.Admin" >
+    update admin
+    set admin_number = #{adminNumber,jdbcType=VARCHAR},
+      admin_name = #{adminName,jdbcType=VARCHAR},
+      admin_password = #{adminPassword,jdbcType=VARCHAR},
+      admin_sex = #{adminSex,jdbcType=INTEGER},
+      admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      admin_address = #{adminAddress,jdbcType=VARCHAR},
+      admin_Img = #{adminImg,jdbcType=VARCHAR},
+      admin_department_id = #{adminDepartmentId,jdbcType=INTEGER},
+      admin_description = #{adminDescription,jdbcType=VARCHAR},
+      admin_state = #{adminState,jdbcType=INTEGER},
+      admin_email = #{adminEmail,jdbcType=VARCHAR}
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+</mapper>
